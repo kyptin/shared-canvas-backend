@@ -1,4 +1,4 @@
-(ns tech.jeffterrell.draw-backend
+(ns tech.jeffterrell.draw.main
   (:gen-class)
   (:require [clojure.edn :as edn]
             [clojure.java.io :as io]

@@ -9,4 +9,4 @@ COMP 426 ("web programming") lecture at UNC Chapel Hill in the fall of 2018.
 
 Run the project directly:
 
-    $ clj -m tech.jeffterrell.draw-backend
+    $ clj -m tech.jeffterrell.draw.main
