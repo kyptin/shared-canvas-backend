@@ -4,4 +4,5 @@
   :license {:name "The MIT License", :url "https://opensource.org/licenses/MIT"}
   :dependencies [[org.clojure/clojure "1.10.0"]
                  [ring "1.7.0"]]
+  :uberjar-name "comp523-backend-standalone.jar"
   :repl-options {:init-ns tech.jeffterrell.draw.main})
