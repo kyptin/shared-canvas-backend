@@ -32,7 +32,7 @@
   ([join?]
    (def server
      (jetty/run-jetty (new-handler (canvas/new-canvas))
-                      {:port (or (System/getenv "PORT") 4002)
+                      {:port (or (Integer/parseInt (System/getenv "PORT")) 4002)
                        :join? join?}))))
 
 (defn stop-server! []
