@@ -1,3 +1,0 @@
-{:paths ["resources" "src"]
- :deps {org.clojure/clojure {:mvn/version "RELEASE"}
-        ring {:mvn/version "1.7.0"}}}
