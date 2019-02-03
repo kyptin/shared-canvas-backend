@@ -19,7 +19,7 @@
     (let [method (:request-method request)
           path (:uri request)]
       (cond
-        (and (= method :get) (= path "/image"))
+        (and (= method :get) (= path "/"))
         (canvas/canvas-as-png-response-map 200 canvas)
 
         (and (= method :post) (= path "/rect"))
