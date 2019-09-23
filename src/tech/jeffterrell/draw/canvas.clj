@@ -17,10 +17,8 @@
     (.setPaint (Color. (float red) (float green) (float blue)))
     (.draw (Rectangle. x y width height))))
 
-(defn canvas-as-png-response-map
-  [status canvas]
+(defn canvas-as-png-data
+  [canvas]
   (let [buffer (ByteArrayOutputStream.)]
     (ImageIO/write canvas "PNG" buffer)
-    {:status status
-     :headers {"Content-Type" "image/png"}
-     :body (ByteArrayInputStream. (.toByteArray buffer))}))
+    (ByteArrayInputStream. (.toByteArray buffer))))

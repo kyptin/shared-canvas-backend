@@ -5,7 +5,13 @@
             [tech.jeffterrell.draw.parse-request
              :refer [verify-edn-body-then verify-rectangle-data-then]]))
 
-(defn handle-rect-request
+(defn handle-get-canvas
+  [canvas]
+  {:status 200
+   :headers {"Content-Type" "image/png"}
+   :body (canvas/canvas-as-png-data canvas)})
+
+(defn handle-create-rect
   [canvas request]
   (verify-edn-body-then request
     (fn [data]
@@ -22,10 +28,10 @@
           path (:uri request)]
       (cond
         (and (= method :get) (= path "/"))
-        (canvas/canvas-as-png-response-map 200 canvas)
+        (handle-get-canvas canvas)
 
         (and (= method :post) (= path "/rect"))
-        (handle-rect-request canvas request)
+        (handle-create-rect canvas request)
 
         :else {:status 404}))))
 
