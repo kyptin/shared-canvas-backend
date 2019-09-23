@@ -12,7 +12,7 @@
   (BufferedImage. width height BufferedImage/TYPE_INT_RGB))
 
 (defn draw-rect
-  [canvas x y width height red green blue]
+  [^BufferedImage canvas x y width height red green blue]
   (doto (.createGraphics canvas)
     (.setPaint (Color. (float red) (float green) (float blue)))
     (.draw (Rectangle. x y width height))))
