@@ -18,10 +18,12 @@
 (defn draw-rect
   "Draw a rectangle of the given dimensions and color on the given canvas.
   Returns nil, so call it as a statement rather than a function."
-  [^BufferedImage canvas x y width height red green blue]
-  (doto (.createGraphics canvas)
-    (.setPaint (Color. (float red) (float green) (float blue)))
-    (.draw (Rectangle. x y width height))))
+  [^BufferedImage canvas rect]
+  (let [{:keys [x y width height color]} rect
+        {:keys [red green blue]} color]
+    (doto (.createGraphics canvas)
+      (.setPaint (Color. (float red) (float green) (float blue)))
+      (.draw (Rectangle. x y width height)))))
 
 (defn canvas-as-png-data
   "Return the canvas as PNG data, ready to be served as the body of a response

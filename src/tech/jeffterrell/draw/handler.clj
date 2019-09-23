@@ -5,8 +5,7 @@
   endpoints."
   (:require
    [tech.jeffterrell.draw.canvas :as canvas]
-   [tech.jeffterrell.draw.parse-request :refer [verify-edn-body-then
-                                                verify-rectangle-data-then]]))
+   [tech.jeffterrell.draw.parse-rectangle :refer [parse-rectangle-then]]))
 
 (defn handle-get-canvas
   "Handle the get canvas request, and return a ring response map."
@@ -18,14 +17,10 @@
 (defn handle-create-rect
   "Handle the create rectangle request, and return a ring response map."
   [canvas request]
-  (verify-edn-body-then request
-    (fn [data]
-      (verify-rectangle-data-then data
-        (fn [rect]
-          (let [[x y width height color] rect
-                [red green blue] color]
-            (canvas/draw-rect canvas x y width height red green blue)
-            {:status 200}))))))
+  (parse-rectangle-then request
+    (fn [rect]
+      (canvas/draw-rect canvas rect)
+      {:status 204})))
 
 (defn handler-with-new-canvas
   "Create a new stateful canvas and return a ring request handler that uses it."
