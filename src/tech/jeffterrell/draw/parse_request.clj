@@ -1,4 +1,6 @@
 (ns tech.jeffterrell.draw.parse-request
+  "This namespace contains functions to parse and verify data attached to a ring
+  request."
   (:require [clojure.edn :as edn]
             [clojure.spec.alpha :as s]))
 
