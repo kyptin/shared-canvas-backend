@@ -2,17 +2,19 @@
   (:gen-class)
   (:require [ring.adapter.jetty :as jetty]
             [tech.jeffterrell.draw.canvas :as canvas]
-            [tech.jeffterrell.draw.macros :refer [with-verified-edn-body
-                                                  with-valid-rect-data]]))
+            [tech.jeffterrell.draw.parse-request
+             :refer [verify-edn-body-then verify-rectangle-data-then]]))
 
 (defn handle-rect-request
   [canvas request]
-  (with-verified-edn-body request [body-data]
-    (with-valid-rect-data body-data
-      (let [[x y width height color] body-data
-            [red green blue] color]
-        (canvas/draw-rect canvas x y width height red green blue)
-        {:status 200}))))
+  (verify-edn-body-then request
+    (fn [data]
+      (verify-rectangle-data-then data
+        (fn [rect]
+          (let [[x y width height color] rect
+                [red green blue] color]
+            (canvas/draw-rect canvas x y width height red green blue)
+            {:status 200}))))))
 
 (defn new-handler [canvas]
   (fn [request]
