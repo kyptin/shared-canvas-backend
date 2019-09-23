@@ -28,12 +28,14 @@
   (let [canvas (canvas/new-canvas)]
     (fn [request]
       (let [method (:request-method request)
-            path (:uri request)]
-        (cond
-          (and (= method :get) (= path "/"))
-          (handle-get-canvas canvas)
+            path (:uri request)
+            response
+            (cond
+              (and (= method :get) (= path "/"))
+              (handle-get-canvas canvas)
 
-          (and (= method :post) (= path "/rect"))
-          (handle-create-rect canvas request)
+              (and (= method :post) (= path "/rect"))
+              (handle-create-rect canvas request)
 
-          :else {:status 404})))))
+              :else {:status 404})]
+        (assoc-in response [:headers "access-control-allow-origin"] "*")))))
