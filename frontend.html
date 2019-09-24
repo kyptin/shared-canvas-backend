@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Backend tutorial</title>
+    <style>
+     form {
+         display: table;
+     }
+
+     form div {
+         display: table-row;
+     }
+
+     form label, form input {
+         display: table-cell;
+         margin-bottom: 10px;
+     }
+
+     form label {
+         width: 400px;
+         padding-right: 5%;
+         text-align: right;
+     }
+
+     form input {
+         width: 100px;
+     }
+    </style>
+  </head>
+
+  <body>
+    <h1>Gimme a rect</h1>
+    <form action="https://comp523-backend-demo.herokuapp.com/rect" method="post">
+      <div>
+        <label for="x">X:</label>
+        <input type="text" id="x" name="x">
+      </div>
+      <div>
+        <label for="y">Y:</label>
+        <input type="text" id="y" name="y">
+      </div>
+      <div>
+        <label for="width">width:</label>
+        <input type="text" id="width" name="width">
+      </div>
+      <div>
+        <label for="height">height:</label>
+        <input type="text" id="height" name="height">
+      </div>
+      <div>
+        <label for="red">red component (between 0 and 1):</label>
+        <input type="text" id="red" name="red">
+      </div>
+      <div>
+        <label for="green">green component (between 0 and 1):</label>
+        <input type="text" id="green" name="green">
+      </div>
+      <div>
+        <label for="blue">blue component (between 0 and 1):</label>
+        <input type="text" id="blue" name="blue">
+      </div>
+      <div>
+        <label></label>
+        <input type="submit" />
+      </div>
+    </form>
+
+    <script>
+     // Heavily modified from
+     // https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/Using_XMLHttpRequest
+
+     window.sendXhr = () => {
+         var oAjaxReq = new XMLHttpRequest()
+         oAjaxReq.open('post', 'http://localhost:4002/rect', true)
+         oAjaxReq.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded')
+         oAjaxReq.send('x=123&y=456&width=50&height=30&red=0.5&green=0.2&blue=0.9')
+     }
+
+     /*
+      // This is nicer code, but can't use because I don't have multi-part
+      // params working at the backend.
+      //
+      // Modified from https://developer.mozilla.org/en-US/docs/Web/API/FormData/Using_FormData_Objects
+      window.getFormData = () => {
+        var formData = new FormData()
+        formData.append('x', 123)
+        formData.append('y', 456)
+        formData.append('width', 50)
+        formData.append('height', 30)
+        formData.append('red', 0.5)
+        formData.append('green', 0.2)
+        formData.append('blue', 0.9)
+        return formData
+      }
+
+      window.sendRect = (formData) => {
+        var request = new XMLHttpRequest()
+        request.open('POST', 'http://localhost:4002/rect')
+        request.send(formData)
+      }
+      */
+    </script>
+  </body>
+</html>
