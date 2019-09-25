@@ -32,3 +32,10 @@
   (let [buffer (ByteArrayOutputStream.)]
     (ImageIO/write canvas "PNG" buffer)
     (ByteArrayInputStream. (.toByteArray buffer))))
+
+(defn clear
+  "Reset the canvas to a blank slate."
+  [^BufferedImage canvas]
+  (doto (.createGraphics canvas)
+    (.setBackground (Color. 0 0 0 255))
+    (.clearRect 0 0 (.getWidth canvas) (.getHeight canvas))))

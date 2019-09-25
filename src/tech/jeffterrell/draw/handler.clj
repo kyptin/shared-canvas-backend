@@ -22,6 +22,12 @@
       (canvas/draw-rect canvas rect)
       {:status 204})))
 
+(defn handle-clear-canvas
+  "Clear the canvas and return a 204 response."
+  [canvas]
+  (canvas/clear canvas)
+  {:status 204})
+
 (defn handler-with-new-canvas
   "Create a new stateful canvas and return a ring request handler that uses it."
   []
@@ -37,6 +43,9 @@
 
               (and (= method :post) (= path "/rect"))
               (handle-create-rect canvas request)
+
+              (and (= method :post) (= path "/clear"))
+              (handle-clear-canvas canvas)
 
               :else {:status 404})]
         (assoc-in response [:headers "access-control-allow-origin"] "*")))))
