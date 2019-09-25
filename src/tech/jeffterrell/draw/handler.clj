@@ -29,6 +29,7 @@
     (fn [request]
       (let [method (:request-method request)
             path (:uri request)
+            _ (prn 'request (select-keys request [:request-method :uri]))
             response
             (cond
               (and (= method :get) (= path "/"))

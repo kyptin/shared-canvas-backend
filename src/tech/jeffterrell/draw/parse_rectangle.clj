@@ -47,6 +47,7 @@
             [r g b] color
             color {:red r, :green g, :blue b}
             rect {:x x, :y y, :width width, :height height, :color color}]
+        (println "Creating rectangle from EDN-encoded data with params:" (pr-str rect))
         (body-fn rect)))))
 
 (defn parse-edn-rectangle-then
@@ -70,6 +71,7 @@
           color {:red (f red), :green (f green), :blue (f blue)}
           rect {:x (f x), :y (f y), :width (f width), :height (f height)
                 :color color}]
+      (println "Creating rectangle from form-encoded data with params:" (pr-str rect))
       (body-fn rect))
     (catch NumberFormatException _
       {:status 400
